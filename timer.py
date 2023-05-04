@@ -1,12 +1,21 @@
-import time 
+import time
+from datetime import timedelta
 
-my_time = int(input("Enter time in seconds: "))
+while True:
+    try:
+        my_time = int(input("Enter time in seconds: "))
+        if my_time > 0:
+            break
+        else:
+            print("Invalid input. Please enter a positive number.")
+    except ValueError:
+        print("Invalid input. Please enter a valid integer.")
 
-for x in range (my_time, 0, -1):
-    seconds = x % 60
-    minutes = int(x / 60) % 60
-    hours = int(x / 3600)
-    print(f"{hours:02}:{minutes:02}:{seconds:02}")
+time_delta = timedelta(seconds=my_time)
+
+for delta in reversed(range(my_time)):
+    time_left = str(time_delta - timedelta(seconds=delta))
+    print(time_left[-8:])
     time.sleep(1)
 
 print("TIME IS UP!")
